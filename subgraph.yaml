@@ -1,0 +1,29 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: BonusRewards
+    network: mainnet
+    source:
+      address: "0x8fc8551dd5e2dc5d2b04f2957e543d7d53a79f1e"
+      abi: BonusRewards
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Deposit
+        - OwnershipTransferred
+        - Withdraw
+      abis:
+        - name: BonusRewards
+          file: ./abis/BonusRewards.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed address,uint256)
+          handler: handleDeposit
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Withdraw(indexed address,indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.ts
