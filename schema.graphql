@@ -1,6 +1,36 @@
-type ExampleEntity @entity {
+type BalanceEntity @entity {
   id: ID!
   count: BigInt!
   user: Bytes! # address
   lpToken: Bytes! # address
 }
+
+type _Schema_
+  @fulltext(
+    name: "userSearch",
+    language: en
+    algorithm: rank,
+    include: [
+      {
+        entity: "BalanceEntity",
+        fields: [
+          { name: "user" },
+        ]
+      }
+    ]
+  )
+
+type _Schema_
+  @fulltext(
+    name: "lpTokenSearch",
+    language: en
+    algorithm: rank,
+    include: [
+      {
+        entity: "BalanceEntity",
+        fields: [
+          { name: "lpToken" },
+        ]
+      }
+    ]
+  )
