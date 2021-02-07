@@ -23,7 +23,7 @@ export function handleDeposit(event: Deposit): void {
   }
 
   // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(event.params.amount)
+  entity.count = entity.count + event.params.amount
 
   // Entity fields can be set based on event parameters
   entity.user = event.params.user
